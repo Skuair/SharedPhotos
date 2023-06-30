@@ -128,8 +128,12 @@ public class PictureFragment extends Fragment implements LoaderManager.LoaderCal
 
     private boolean subtitlesEnabled() {
         if(getActivity() != null && getActivity().getApplicationContext() != null) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-            return prefs.getBoolean(SettingsActivity.KEY_PREF_SUBTITLE, true);
+            if (isTV) {
+                return false;
+            } else {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                return prefs.getBoolean(SettingsActivity.KEY_PREF_SUBTITLE, true);
+            }
         }
         return true;
     }
